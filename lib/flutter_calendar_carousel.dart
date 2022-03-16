@@ -318,7 +318,7 @@ class _CalendarState<T extends EventInterface>
       _targetDate = _selectedDate;
     }
     if (widget.weekFormat) {
-      _pageNum = _targetDate.difference(_firstDayOfWeek(minDate)).inDays ~/ 7;
+      _pageNum = _firstDayOfWeek(_targetDate).difference(_firstDayOfWeek(minDate)).inDays ~/ 7;
     } else {
       _pageNum = (_targetDate.year - minDate.year) * 12 +
           _targetDate.month -
