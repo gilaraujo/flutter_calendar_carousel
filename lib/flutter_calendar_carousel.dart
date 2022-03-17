@@ -805,7 +805,7 @@ class _CalendarState<T extends EventInterface>
 
   DateTime _firstDayOfWeek(DateTime date) {
     var day = _createUTCMiddayDateTime(date);
-    return day.subtract(new Duration(days: date.weekday - firstDayOfWeek % 7));
+    return day.subtract(new Duration(days: date.weekday % 7));
   }
 
   DateTime _lastDayOfWeek(DateTime date) {
