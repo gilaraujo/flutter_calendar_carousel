@@ -270,6 +270,10 @@ class _CalendarState<T extends EventInterface>
     final selectedDateTime = widget.selectedDateTime;
     if (selectedDateTime != null) _selectedDate = selectedDateTime;
 
+    _localeDate = DateFormat.yMMM(widget.locale);
+    firstDayOfWeek = widget.firstDayOfWeek ??
+        (_localeDate.dateSymbols.FIRSTDAYOFWEEK + 1) % 7;
+
     _init();
 
     /// setup pageController
@@ -280,10 +284,6 @@ class _CalendarState<T extends EventInterface>
 
       /// width percentage
     );
-
-    _localeDate = DateFormat.yMMM(widget.locale);
-    firstDayOfWeek = widget.firstDayOfWeek ??
-        (_localeDate.dateSymbols.FIRSTDAYOFWEEK + 1) % 7;
 
     _setDate();
   }
@@ -805,7 +805,7 @@ class _CalendarState<T extends EventInterface>
 
   DateTime _firstDayOfWeek(DateTime date) {
     var day = _createUTCMiddayDateTime(date);
-    return day.subtract(new Duration(days: date.weekday % 7));
+    return day.subtract(new Duration(days: date.weekday - firstDayOfWeek % 7));
   }
 
   DateTime _lastDayOfWeek(DateTime date) {
